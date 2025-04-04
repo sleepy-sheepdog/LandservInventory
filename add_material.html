@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ 'Edit' if edit else 'Add' }} Material</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="p-4">
+    <div class="container">
+        <h2>{{ 'Edit' if edit else 'Add New' }} Material</h2>
+        <form method="post">
+            {{ form.hidden_tag() }}
+            {% for field in form if field.name != 'csrf_token' %}
+                <div class="mb-3">
+                    {{ field.label(class="form-label") }}
+                    {{ field(class="form-control") }}
+                    {% for error in field.errors %}
+                        <div class="text-danger">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+            {{ form.submit(class="btn btn-primary") }}
+            <a href="{{ url_for('materials') }}" class="btn btn-secondary">Back</a>
+        </form>
+    </div>
+</body>
+</html>
