@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Update Quantity for {{ material.name }}</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.quantity.label }} {{ form.quantity() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}

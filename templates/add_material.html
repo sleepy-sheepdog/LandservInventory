@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{% if edit %}Edit{% else %}Add{% endif %} Material</h1>
+<form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}
+    {{ form.quantity.label }} {{ form.quantity() }}
+    {{ form.unit.label }} {{ form.unit() }}
+    {{ form.unit_price.label }} {{ form.unit_price() }}
+    {{ form.supplier.label }} {{ form.supplier() }}
+    {{ form.material_type.label }} {{ form.material_type() }}
+    {{ form.description.label }} {{ form.description() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}

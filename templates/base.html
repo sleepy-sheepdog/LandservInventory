@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landserv Inventory</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <img src="{{ url_for('static', filename='photos/full_logo.png') }}" alt="Landserv Logo">
+    </header>
+
+    <nav>
+        {% if current_user.is_authenticated %}
+            <a href="{{ url_for('materials') }}">Materials</a>
+            <a href="{{ url_for('add_material') }}">Add Material</a>
+            <a href="{{ url_for('export_csv') }}">Export CSV</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        {% else %}
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        {% endif %}
+    </nav>
+
+    <main>
+        {% block content %}
+        <section class="hero">
+            <h1>Welcome to Landserv Inventory System</h1>
+            <p>
+                Manage your crew materials, update quantities, and keep your project supplies organized with ease.
+            </p>
+            {% if not current_user.is_authenticated %}
+                <div class="button-group">
+                    <a href="{{ url_for('login') }}"><button>Login</button></a>
+                    <a href="{{ url_for('register') }}"><button>Register</button></a>
+                </div>
+            {% endif %}
+        </section>
+        {% endblock %}
+    </main>
+
+    <footer>
+        <img src="{{ url_for('static', filename='photos/small_logo.png') }}" alt="Landserv Icon">
+        &copy; {{ current_year }} Landserv Inventory System
+    </footer>
+</body>
+</html>

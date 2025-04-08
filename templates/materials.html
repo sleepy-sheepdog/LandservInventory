@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Materials List</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Quantity</th>
+      <th>Unit</th>
+      <th>Unit Price</th>
+      <th>Supplier</th>
+      <th>Material Type</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for material in materials %}
+    <tr>
+      <td>{{ material.name }}</td>
+      <td>{{ material.quantity }}</td>
+      <td>{{ material.unit }}</td>
+      <td>{{ material.unit_price }}</td>
+      <td>{{ material.supplier }}</td>
+      <td>{{ material.material_type }}</td>
+      <td>{{ material.description }}</td>
+      <td>
+        <form method="post" action="{{ url_for('delete_material', id=material.id) }}" style="display:inline;">
+          <button type="submit">Delete</button>
+        </form>
+        <a href="{{ url_for('edit_material', id=material.id) }}">
+          <button>Edit</button>
+        </a>
+        {% if current_user.role in ['admin', 'crew_leader', 'crew_member'] %}
+        <a href="{{ url_for('update_quantity', id=material.id) }}">
+          <button>Update Quantity</button>
+        </a>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
