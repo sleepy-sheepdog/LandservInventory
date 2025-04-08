@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Fleet Equipment</h1>
+<a href="{{ url_for('add_equipment') }}"><button>Add New Equipment</button></a>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th><th>Type</th><th>Make</th><th>Model</th><th>Inspection</th><th>Oil Change</th><th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in equipment %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.type }}</td>
+      <td>{{ item.make }}</td>
+      <td>{{ item.model }}</td>
+      <td>{{ item.inspection_due }}</td>
+      <td>{{ item.oil_change_due }}</td>
+      <td>
+        <a href="{{ url_for('view_equipment', id=item.id) }}"><button>View</button></a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

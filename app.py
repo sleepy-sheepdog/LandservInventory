@@ -8,10 +8,18 @@ from wtforms.validators import InputRequired, NumberRange
 from flask_login import LoginManager, login_user, logout_user, login_required, UserMixin, current_user
 import io
 import csv
+import os
+from fleet_routes import fleet_bp
+
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 csrf = CSRFProtect(app)
+
+app.config['UPLOAD_FOLDER'] = 'static/uploads'
+os.makedirs(app.config['UPLOAD_FOLDER'], exist_ok=True)
+
+app.register_blueprint(fleet_bp)
 
 login_manager = LoginManager()
 login_manager.init_app(app)

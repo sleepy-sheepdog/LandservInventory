@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{{ equipment.name }} - {{ equipment.type }}</h1>
+<p><strong>Make:</strong> {{ equipment.make }}</p>
+<p><strong>Model:</strong> {{ equipment.model }}</p>
+<p><strong>Year:</strong> {{ equipment.year }}</p>
+<p><strong>Mileage:</strong> {{ equipment.mileage }}</p>
+<p><strong>Inspection Due:</strong> {{ equipment.inspection_due }}</p>
+<p><strong>Oil Change Due:</strong> {{ equipment.oil_change_due }}</p>
+{% if equipment.image_path %}
+<img src="{{ url_for('static', filename='uploads/' ~ equipment.image_path) }}" alt="Equipment Image" width="300">
+{% endif %}
+<p><strong>Notes:</strong><br>{{ equipment.notes }}</p>
+
+<a href="{{ url_for('add_service_log', id=equipment.id) }}"><button>Add Service Log</button></a>
+<h2>Service History</h2>
+<ul>
+  {% for log in service_logs %}
+    <li>
+      <strong>{{ log.service_date }}:</strong> {{ log.description }}
+      {% if log.photo_path %}
+        <br><img src="{{ url_for('static', filename='uploads/' ~ log.photo_path) }}" alt="Service Photo" width="200">
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
+{% endblock %}

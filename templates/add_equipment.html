@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Add Equipment</h1>
+<form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+    {{ form.name.label }} {{ form.name() }}
+    {{ form.type.label }} {{ form.type() }}
+    {{ form.make.label }} {{ form.make() }}
+    {{ form.model.label }} {{ form.model() }}
+    {{ form.year.label }} {{ form.year() }}
+    {{ form.mileage.label }} {{ form.mileage() }}
+    {{ form.oil_change_due.label }} {{ form.oil_change_due() }}
+    {{ form.inspection_due.label }} {{ form.inspection_due() }}
+    {{ form.notes.label }} {{ form.notes() }}
+    {{ form.image.label }} {{ form.image() }}
+    {{ form.submit() }}
+</form>
+{% endblock %}
